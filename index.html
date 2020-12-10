@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Matisse VerDuyn</title>
+    <meta name="description" content="Matisse VerDuyn is an experienced web and mobile app developer.">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" href="./favicon.ico?v=1.0.0">
+    <script src="./vue.js"></script>
+    <link rel="stylesheet" href="./index.min.css">
+  </head>
+  <div id="app" class="inverted">
+    
+    <h1 id="score" :style="{
+      opacity: kNMistakes > 2 ? 1 : 0.382
+    }">{{ kNPoints }}</h1>
+    
+    <div id="restart" v-if="kNMistakes > 2">
+      <button type="button" class="button small flag" @click.stop.prevent="kSLanguage = 'english'; ma_new_game()"><img src="./assets/images/icons/english.png"></button>
+      <button type="button" class="button small flag" @click.stop.prevent="kSLanguage = 'russian'; ma_new_game()"><img src="./assets/images/icons/russian.png"></button>
+    </div>
+    
+    <h4 id="mistakes" v-else>
+      <span :style="{
+        opacity: kNMistakes > 0 ? 1 : 0.146
+      }">X</span>&nbsp;<span :style="{
+        opacity: kNMistakes > 1 ? 1 : 0.146
+      }">X</span>&nbsp;<span :style="{
+        opacity: kNMistakes > 2 ? 1 : 0.146
+      }">X</span>
+    </h4>
+    
+    <input
+     id="letters"
+     type="text"
+     @keyup="ms_press($event.target.value.substr(-1))"
+     ref="autofocus"
+     :class="{
+       'invisible': kNMistakes > 2
+     }"
+     />
+    
+    <button
+     v-for="($i1v, $i1k, $i1i) in kAPixits"
+     class="pixit"
+     :class="{
+       'falling': $i1v.falling,
+       'through': $i1v.through,
+       [$i1v.speed]: true,
+       'clicked': $i1v.clicked
+     }"
+     :style="{
+       'left': ($i1v.lane * 7) + 'vw'
+     }"
+     :key="$i1v.id"
+     >
+      <div>
+        <img :src="$i1v.img" />
+        <img :class="{
+         [$i1v.anim]: true
+        }" :src="$i1v.alt" />
+      </div>
+      <p>{{$i1v.letter}}</p>
+    </button>
+    
+    <span
+     v-for="($i1v, $i1k, $i1i) in kHSlots"
+     class="slot"
+     :style="{
+       'left': ($i1i * 7) + 'vw',
+       'background-color': (($i1v !== false) ? kHHex[$i1v] : 'transparent')
+     }">&nbsp;</span>
+    
+    <a id="contact" href="https://twitter.com/matisseverduyn" target="_blank" rel="noopener noreferrer"><button>Contact</button></a>
+    
+  </div>
+  <script src="./index.min.js"></script>
+</body>
+</html>
