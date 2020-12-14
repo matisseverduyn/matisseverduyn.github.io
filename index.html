@@ -19,8 +19,11 @@
     }">{{ kNPoints }}</h1>
     
     <div id="restart" v-if="kNMistakes > 2">
+      <button type="button" class="button small" @click.stop.prevent="kSLanguage = 'english'; ma_new_game()">Play again</button>
+      <!--
       <button type="button" class="button small flag" @click.stop.prevent="kSLanguage = 'english'; ma_new_game()"><img src="./assets/images/icons/english.png"></button>
       <button type="button" class="button small flag" @click.stop.prevent="kSLanguage = 'russian'; ma_new_game()"><img src="./assets/images/icons/russian.png"></button>
+      -->
     </div>
     
     <h4 id="mistakes" v-else>
@@ -76,7 +79,7 @@
        'background-color': (($i1v !== false) ? kHHex[$i1v] : 'transparent')
      }">&nbsp;</span>
     
-    <a id="contact" href="https://twitter.com/matisseverduyn" target="_blank" rel="noopener noreferrer"><button>Contact</button></a>
+    <a id="contact" href="https://twitter.com/matisseverduyn" target="_blank" rel="noopener noreferrer"><button type="button" class="button small">Contact</button></a>
     
   </div>
   <script src="./index.min.js"></script>
